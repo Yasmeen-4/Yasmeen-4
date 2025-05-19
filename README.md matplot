@@ -1,0 +1,37 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+# Create a line plot
+plt.plot(x, y)
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title("Sine Wave")
+plt.show()
+
+# Create a scatter plot
+plt.scatter(x, y)
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title("Scatter Plot")
+plt.show()
+
+# Create a bar chart
+categories = ['A', 'B', 'C', 'D']
+values = [10, 15, 7, 12]
+plt.bar(categories, values)
+plt.xlabel("Categories")
+plt.ylabel("Values")
+plt.title("Bar Chart")
+plt.show()
+
+# Create a histogram
+data = np.random.randn(1000)
+plt.hist(data, bins=30)
+plt.xlabel("Values")
+plt.ylabel("Frequency")
+plt.title("Histogram")
+plt.show()
