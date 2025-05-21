@@ -1,37 +1,25 @@
+
+
 import pandas as pd
-import numpy as np
 
-# Load the Titanic dataset
-titanic_df = pd.read_csv('titanic.csv')
+# Create a sample dataset
+data = {'Name': ['Alice', 'Bob', 'Charlie'], 
+        'Age': [25, 30, 35], 
+        'City': ['New York', 'Los Angeles', 'Chicago']}
 
-# Display the first few rows of the dataframe
-print("First 5 rows of the dataset:")
-print(titanic_df.head())
+# Convert the dictionary to a DataFrame
+df = pd.DataFrame(data)
 
-# Get basic information about the dataset
-print("\nDataset information:")
-titanic_df.info()
+# Display the DataFrame
+print(df)
 
-# Generate descriptive statistics
-print("\nDescriptive statistics:")
-print(titanic_df.describe())
+# Save the DataFrame to a CSV file
+df.to_csv('sample_dataset.csv', index=False)
 
-# Check for missing values
-print("\nMissing values:")
-print(titanic_df.isnull().sum())
+# Read the CSV file back into a DataFrame
+df_loaded = pd.read_csv('sample_dataset.csv')
 
-# Calculate survival rate
-print("\nSurvival rate:")
-print(titanic_df['Survived'].value_counts(normalize=True))
+# Display the loaded DataFrame
+print(df_loaded)
 
-# Survival rate by gender
-print("\nSurvival rate by gender:")
-print(titanic_df.groupby('Sex')['Survived'].value_counts(normalize=True))
 
-# Survival rate by passenger class
-print("\nSurvival rate by passenger class:")
-print(titanic_df.groupby('Pclass')['Survived'].value_counts(normalize=True))
-
-# Age distribution
-print("\nAge distribution:")
-print(titanic_df['Age'].hist())
