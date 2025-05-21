@@ -1,38 +1,45 @@
-# Import necessary libraries
+
+Here's an example of exploratory data analysis (EDA) in Python using a real-world dataset:
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.datasets import load_iris
 
-# Load the Iris dataset
-iris = load_iris()
-df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
-df['species'] = iris.target
+# Load the dataset
+url = 'https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv'
+df = pd.read_csv(url)
 
-# Map species to their names
-species_map = {0: 'setosa', 1: 'versicolor', 2: 'virginica'}
-df['species'] = df['species'].map(species_map)
+# View the first few rows
+print(df.head())
+
+# Check for missing values
+print(df.isnull().sum())
 
 # Summary statistics
 print(df.describe())
 
-# Data visualization
-sns.pairplot(df, hue='species')
+# Distribution of total bill
+plt.figure(figsize=(8, 6))
+sns.histplot(df['total_bill'], kde=True)
+plt.title('Distribution of Total Bill')
 plt.show()
 
-# Correlation analysis
-corr_matrix = df.drop('species', axis=1).corr()
-print(corr_matrix)
+# Relationship between total bill and tip
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='total_bill', y='tip', data=df)
+plt.title('Relationship between Total Bill and Tip')
+plt.show()
 
-# Heatmap for correlation matrix
+# Box plot of tip by day
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='day', y='tip', data=df)
+plt.title('Tip by Day')
+plt.show()
+
+# Correlation matrix
+corr_matrix = df.corr()
 plt.figure(figsize=(8, 6))
 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix')
 plt.show()
-
-# Box plots for each feature
-for feature in df.columns[:-1]:
-    plt.figure(figsize=(8, 6))
-    sns.boxplot(x='species', y=feature, data=df)
-    plt.title(f'Box plot of {feature} by species')
-    plt.show()
